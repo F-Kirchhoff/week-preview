@@ -1,26 +1,27 @@
-import createHandover from "./createHandover";
-import createMarkdownTable from "./createMardownTable";
-import parseSchedule from "./parseSchedule";
-
-const nextMonday = "11/6/2023";
+import createHandover from "./src/createHandover";
+import createMarkdownTable from "./src/createMardownTable";
+import parseSchedule from "./src/parseSchedule";
 
 const input = `
-Git CLI & Remote
-Git Branches and PRs
-Recap Project 1
-Accessibility 🆕 / Active Learning
-JS Basics
-CSS Structure 🆕
-JS Variables and Numbers
-📒 Self Directed Learning - Week 2
-JS Conditions and Booleans
-CSS Responsive 🆕 / Active Learning
+JS Functions
+JS Functions 2
+HTML Forms 🆕
+JS Inputs and Strings 🆕 / Active Learning
+JS Objects and Arrays
+JS Forms 🆕
+JS createElement
+📒 Self Directed Learning - Week 3
+Recap Project 2
+Recap Project 2
 `;
 const rows = parseSchedule(input);
 
 const markdownTable = createMarkdownTable(rows);
-console.log(markdownTable);
+const handover = createHandover(rows);
 
-const handover = createHandover(rows, new Date(nextMonday));
-
-console.log(handover);
+const output = Bun.file("./output.md").writer();
+output.flush();
+output.write(markdownTable);
+output.write(`\n---\n`);
+output.write(handover);
+output.flush();
